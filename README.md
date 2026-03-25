@@ -50,6 +50,9 @@ O cadastro com sucesso, após preencher tudo com uma senha com mais de 6 dígito
 
 Se algum campo não for preenchido aparece a mensagem com a class .errorLabel, com a mensagem "O campo nome deve ser preenchido" ou "O campo e-mail deve ser preenchido corretamente" ou "O campo senha deve ter pelo menos 6 dígitos"
 ```
+
+## Estrutura
+
 ```
 web-automation-cypress/
 ├── cypress/
