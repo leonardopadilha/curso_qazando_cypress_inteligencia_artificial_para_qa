@@ -8,6 +8,75 @@ Projeto de automação de testes web com Cypress, focado em qualidade, manutenib
 - Estrutura modular pensada para escalabilidade e facilidade de integração com pipelines CI/CD.
 - Foco em boas práticas de teste, documentação clara e valor para recrutadores técnicos.
 
+## 🚀 Tecnologias Utilizadas
+
+- **Cypress** - Framework de testes E2E
+- **Node.js** - Runtime JavaScript
+- **JavaScript (CommonJS)** - Linguagem de programação
+- **Page Objects + Custom Commands** - Arquitetura profissional
+
+## 🏗️ Arquitetura - Page Objects + Custom Commands
+
+Este projeto utiliza uma arquitetura profissional que combina **Page Objects** e **Custom Commands**:
+
+### Page Objects
+Classes que encapsulam elementos e ações de cada página:
+- Centralizam seletores de elementos
+- Contêm métodos de ação (preencher, clicar, validar)
+- Implementam Fluent API para encadeamento
+
+### Custom Commands
+Comandos reutilizáveis que chamam os Page Objects:
+- `cy.fazerLogin()` - Fluxo completo de login
+- `cy.fazerCadastro()` - Fluxo completo de cadastro
+- `cy.validarLoginSucesso()` - Validações específicas
+
+### Fluxo de Execução
+```
+Teste (.cy.js) → Custom Command → Page Object → Elemento
+```
+
+## 📁 Estrutura Atual
+
+```
+web-automation-cypress/
+├── cypress/
+│   ├── e2e/
+│   │   ├── login.cy.js          # Testes de login (usando Custom Commands)
+│   │   └── register.cy.js       # Testes de cadastro (usando Custom Commands)
+│   ├── support/
+│   │   ├── e2e.js               # Custom Commands
+│   │   └── pageobjects/
+│   │       ├── LoginPage.js     # Page Object - Login
+│   │       └── RegisterPage.js  # Page Object - Cadastro
+│   ├── fixtures/
+│   ├── screenshots/
+│   └── config.js
+├── cypress.config.js     # Configuração do Cypress
+├── package.json          # Dependências
+└── README.md
+```
+
+## 🧪 Casos de Teste Implementados
+
+### Login
+- ✅ Login com sucesso
+- ❌ Login com e-mail vazio
+- ❌ Login com senha vazia
+- ❌ Login com senha inválida
+- ❌ Login com e-mail inválido
+- 🔗 Link "Ainda não tem conta?"
+
+### Cadastro
+- ✅ Cadastro com sucesso
+- ❌ Erro quando nome não preenchido
+- ❌ Erro quando e-mail inválido
+- ❌ Erro quando e-mail vazio
+- ❌ Erro quando senha vazia
+- ❌ Senha com menos de 6 dígitos
+- ✅ Cadastro com senha de 6 caracteres (boundary)
+- 🛡️ Proteção contra double-click
+
 ## Prompts utilizados no desenvolvimento
 
 ### Prompt para criação do projeto inicial
@@ -51,17 +120,20 @@ O cadastro com sucesso, após preencher tudo com uma senha com mais de 6 dígito
 Se algum campo não for preenchido aparece a mensagem com a class .errorLabel, com a mensagem "O campo nome deve ser preenchido" ou "O campo e-mail deve ser preenchido corretamente" ou "O campo senha deve ter pelo menos 6 dígitos"
 ```
 
-## Estrutura
+### Prompt para implementação da arquitetura Page Objects + Custom Commands
+```
+Crie as páginas de page objects, depois crie os commands chamandos as funções do page objects e nos arquivos .cy.js chame os commands criados.
+```
 
-```
-web-automation-cypress/
-├── cypress/
-│   ├── e2e/              # Arquivos de teste
-│   ├── fixtures/         # Dados de teste
-│   └── support/          # Suporte global
-├── cypress.config.js     # Configuração do Cypress
-└── package.json          # Dependências
-```
+## 🎯 Benefícios da Arquitetura Atual
+
+| Aspecto | Benefício |
+|---------|-----------|
+| **Manutenibilidade** | Seletores centralizados em Page Objects |
+| **Reutilização** | Custom Commands podem ser usados em múltiplos testes |
+| **Legibilidade** | Testes leem como histórias de usuário |
+| **Escalabilidade** | Fácil adicionar novas páginas e comandos |
+| **Manutenção** | Mudanças de UI afetam apenas Page Objects |
 
 ## Instalação e Execução
 
@@ -80,24 +152,86 @@ npm run cypress:open
 npm test
 ```
 
-## Criar um novo teste
+## 📋 Scripts Disponíveis
 
-Todo arquivo de teste deve estar em `cypress/e2e/` e terminar com `.cy.js`.
+```json
+{
+  "scripts": {
+    "test": "npx cypress run",
+    "cy:open": "npx cypress open"
+  }
+}
+```
 
-Exemplo básico:
+## 🔧 Como Adicionar Novos Testes
 
+### 1. Criar Page Object
 ```javascript
-describe('Meu Teste', () => {
-  it('Deve fazer algo', () => {
-    cy.visit('https://exemplo.com');
-    cy.get('selector').should('be.visible');
+// cypress/support/pageobjects/NovaPaginaPage.js
+class NovaPaginaPage {
+  get elemento() {
+    return cy.get('#seletor');
+  }
+
+  acao() {
+    this.elemento.click();
+    return this;
+  }
+}
+
+module.exports = new NovaPaginaPage();
+```
+
+### 2. Adicionar Custom Commands
+```javascript
+// Em cypress/support/e2e.js
+const NovaPaginaPage = require('./pageobjects/NovaPaginaPage');
+
+Cypress.Commands.add('novaAcao', () => {
+  NovaPaginaPage.acao();
+});
+```
+
+### 3. Usar nos Testes
+```javascript
+// Em cypress/e2e/novo-teste.cy.js
+describe('Novo Teste', () => {
+  it('Cenário', () => {
+    cy.novaAcao();
   });
 });
 ```
 
-## Comandos Cypress mais usados
+## 🌐 URLs de Teste
 
-- `cy.visit()` - Acessar uma URL
+- **Login**: https://automationpratice.com.br/login
+- **Cadastro**: https://automationpratice.com.br/register
+
+## 📊 Relatórios e Screenshots
+
+- **Screenshots**: Salvos automaticamente em `cypress/screenshots/`
+- **Vídeos**: Capturados automaticamente (configurável)
+- **Relatórios**: Integração possível com ferramentas como Allure ou Cypress Dashboard
+
+## 🤝 Contribuição
+
+1. Fork o projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/nova-feature`)
+3. Commit suas mudanças (`git commit -am 'Adiciona nova feature'`)
+4. Push para a branch (`git push origin feature/nova-feature`)
+5. Abra um Pull Request
+
+## 📝 Licença
+
+Este projeto está sob a licença ISC.
+
+## 📞 Suporte
+
+Para dúvidas ou sugestões, abra uma issue no repositório.
+
+---
+
+**Desenvolvido com ❤️ para demonstração de boas práticas em automação de testes**
 - `cy.get()` - Selecionar elementos
 - `cy.click()` - Clicar em um elemento
 - `cy.type()` - Digitar texto

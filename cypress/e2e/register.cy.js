@@ -1,67 +1,55 @@
 describe('Cadastro - Automation Practice', () => {
   beforeEach(() => {
-    cy.visit('https://automationpratice.com.br/register');
+    cy.visitarCadastro();
   });
 
   it('Cadastro com sucesso', () => {
-    cy.get('#user').clear().type('Nome Teste');
-    cy.get('#email').clear().type('usuario@test.com');
-    cy.get('#password').clear().type('senha123');
-    cy.get('#btnRegister').click();
-    cy.get('#swal2-title').should('be.visible').and('have.text', 'Cadastro realizado!');
+    cy.fazerCadastro('Nome Teste', 'usuario@test.com', 'senha123');
+    cy.validarCadastroSucesso();
   });
 
   it('Erro quando nome não for preenchido', () => {
-    cy.get('#email').clear().type('usuario@test.com');
-    cy.get('#password').clear().type('senha123');
-    cy.get('#btnRegister').click();
-    cy.get('.errorLabel').should('be.visible').and('contain.text', 'O campo nome deve ser prenchido');
+    cy.preencherEmailCadastro('usuario@test.com');
+    cy.preencherSenhaCadastro('senha123');
+    cy.clicarBotaoCadastroBtn();
+    cy.validarErroCadastro('O campo nome deve ser prenchido');
   });
 
   it('Erro quando e-mail não for preenchido corretamente', () => {
-    cy.get('#user').clear().type('Nome Teste');
-    cy.get('#email').clear().type('email-invalido');
-    cy.get('#password').clear().type('senha123');
-    cy.get('#btnRegister').click();
-    cy.get('.errorLabel').should('be.visible').and('contain.text', 'O campo e-mail deve ser prenchido corretamente');
+    cy.fazerCadastro('Nome Teste', 'email-invalido', 'senha123');
+    cy.validarErroCadastro('O campo e-mail deve ser prenchido corretamente');
   });
 
   it('Erro quando e-mail não for preenchido', () => {
-    cy.get('#user').clear().type('Nome Teste');
-    cy.get('#password').clear().type('senha123');
-    cy.get('#btnRegister').click();
-    cy.get('.errorLabel').should('be.visible').and('contain.text', 'O campo e-mail deve ser prenchido');
+    cy.preencherNomeCadastro('Nome Teste');
+    cy.preencherSenhaCadastro('senha123');
+    cy.clicarBotaoCadastroBtn();
+    cy.validarErroCadastro('O campo e-mail deve ser prenchido');
   });
 
-    it('Erro quando senha não for preenchida', () => {
-    cy.get('#user').clear().type('Nome Teste');
-    cy.get('#email').clear().type('usuario@test.com');
-    cy.get('#btnRegister').click();
-    cy.get('.errorLabel').should('be.visible').and('contain.text', 'O campo senha deve ter pelo menos 6 dígitos');
+  it('Erro quando senha não for preenchida', () => {
+    cy.preencherNomeCadastro('Nome Teste');
+    cy.preencherEmailCadastro('usuario@test.com');
+    cy.clicarBotaoCadastroBtn();
+    cy.validarErroCadastro('O campo senha deve ter pelo menos 6 dígitos');
   });
 
   it('Senha com menos de 6 dígitos', () => {
-    cy.get('#user').clear().type('Nome Teste');
-    cy.get('#email').clear().type('usuario@test.com');
-    cy.get('#password').clear().type('12345');
-    cy.get('#btnRegister').click();
-    cy.get('.errorLabel').should('be.visible').and('contain.text', 'O campo senha deve ter pelo menos 6 dígitos');
+    cy.fazerCadastro('Nome Teste', 'usuario@test.com', '12345');
+    cy.validarErroCadastro('O campo senha deve ter pelo menos 6 dígitos');
   });
 
   it('Cadastro com sucesso com senha de 6 caracteres (boundary)', () => {
-    cy.get('#user').clear().type('Teste Boundary');
-    cy.get('#email').clear().type('boundary@test.com');
-    cy.get('#password').clear().type('123456');
-    cy.get('#btnRegister').click();
-    cy.get('#swal2-title').should('be.visible').and('have.text', 'Cadastro realizado!');
+    cy.fazerCadastro('Teste Boundary', 'boundary@test.com', '123456');
+    cy.validarCadastroSucesso();
   });
 
   it('Protege contra double-click no botão registrar', () => {
-    cy.get('#user').clear().type('Nome Teste');
-    cy.get('#email').clear().type('doubleclick@test.com');
-    cy.get('#password').clear().type('senha123');
+    cy.preencherNomeCadastro('Nome Teste');
+    cy.preencherEmailCadastro('doubleclick@test.com');
+    cy.preencherSenhaCadastro('senha123');
     cy.get('#btnRegister').dblclick();
-    cy.get('#swal2-title').should('be.visible').and('have.text', 'Cadastro realizado!');
+    cy.validarCadastroSucesso();
     cy.get('#swal2-title').should('have.length', 1);
   });
 });
