@@ -1,7 +1,6 @@
 node_modules/
 
 # Relatórios e Artefatos
-mochawesome-report/
 cypress/screenshots/
 cypress/videos/
 
