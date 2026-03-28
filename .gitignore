@@ -1,4 +1,25 @@
 node_modules/
+
+# Relatórios e Artefatos
+mochawesome-report/
+cypress/screenshots/
+cypress/videos/
+
+# IDE e Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Arquivos temporários
+*.tmp
+.env
+.env.local
 cypress/videos/
 cypress/screenshots/
 .DS_Store

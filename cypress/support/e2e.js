@@ -1,3 +1,6 @@
+// Importar reporter
+import 'cypress-mochawesome-reporter/register';
+
 // Import dos Page Objects
 const LoginPage = require('./pageObjects/LoginPage');
 const RegisterPage = require('./pageObjects/RegisterPage');

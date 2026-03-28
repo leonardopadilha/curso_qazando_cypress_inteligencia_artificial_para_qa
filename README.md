@@ -158,9 +158,61 @@ npm test
 {
   "scripts": {
     "test": "npx cypress run",
-    "cy:open": "npx cypress open"
+    "cy:open": "npx cypress open",
+    "test:report": "npx cypress run && npm run report:open"
   }
 }
+```
+
+## 📊 Sistema de Relatórios
+
+Este projeto inclui um sistema profissional de relatórios com **cypress-mochawesome-reporter**.
+
+### Executar Testes e Gerar Relatório
+
+```bash
+npm run test:report
+```
+
+Este comando:
+- ✅ Executa todos os testes
+- ✅ Gera relatório HTML automático
+- ✅ Abre o relatório no navegador automaticamente
+
+### O relatório inclui:
+
+- 📈 **Gráficos e Charts** - Visualização de resultados com gráficos de pizza, barras e timeline
+- 📋 **Resumo Geral** - Total de testes, passados, falhados e taxa de sucesso
+- 🔍 **Detalhes por Teste** - Nome, status, tempo de execução e mensagens de erro
+- 📸 **Screenshots** - Capturadas automaticamente em testes que falham
+- ⏱️ **Tempo de Execução** - Duração total e por teste
+- 🌐 **Informações Técnicas** - Browser, versão do Cypress e data/hora da execução
+
+### Localização do Relatório
+
+Após a execução, o relatório estará em:
+```
+mochawesome-report/mochawesome.html
+```
+
+### Enviar Relatório por Email
+
+**Opção 1: Anexar arquivo HTML**
+```
+Compacte: mochawesome-report/
+E envie como anexo
+```
+
+**Opção 2: Enviar apenas o HTML**
+```
+Arquivo: mochawesome-report/mochawesome.html
+Destinatário abre no navegador
+```
+
+**Opção 3: Compartilhar por Drive/Cloud**
+```
+Upload da pasta completa: mochawesome-report/
+Compartilhe o link
 ```
 
 ## 🔧 Como Adicionar Novos Testes
@@ -232,15 +284,3 @@ Para dúvidas ou sugestões, abra uma issue no repositório.
 ---
 
 **Desenvolvido com ❤️ para demonstração de boas práticas em automação de testes**
-- `cy.get()` - Selecionar elementos
-- `cy.click()` - Clicar em um elemento
-- `cy.type()` - Digitar texto
-- `cy.should()` - Fazer uma asserção
-- `cy.contains()` - Encontrar por texto
-
-## Próximos passos
-
-- Adicionar mais testes em `cypress/e2e/`
-- Configurar `baseUrl` no `cypress.config.js`
-- Adicionar dados de teste em `cypress/fixtures/`
-- Estender suporte global em `cypress/support/e2e.js`
