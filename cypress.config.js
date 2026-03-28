@@ -2,6 +2,7 @@ module.exports = {
   e2e: {
     //baseUrl: 'http://localhost:3000',
     allowCypressEnv: false, // Desabilitar acesso inseguro a Cypress.env()
+    screenshotOnRunFailure: true,
     reporter: 'cypress-mochawesome-reporter',
     reporterOptions: {
       charts: true,

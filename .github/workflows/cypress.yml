@@ -9,6 +9,8 @@ on:
 jobs:
   cypress:
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     strategy:
       matrix: # é uma estratégia de teste paralelo que permite executar o mesmo job (tarefa) em múltiplas configurações diferentes automaticamente.
@@ -31,7 +33,7 @@ jobs:
         run: npm test
 
       - name: Upload cypress screenshots
-        if: always()
+        if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: cypress-screenshots

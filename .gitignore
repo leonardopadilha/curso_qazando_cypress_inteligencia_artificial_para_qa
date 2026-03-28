@@ -1,7 +1,6 @@
 node_modules/
 
 # Relatórios e Artefatos
-cypress/screenshots/
 cypress/videos/
 
 # IDE e Editor
