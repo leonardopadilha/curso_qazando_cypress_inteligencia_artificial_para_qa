@@ -195,27 +195,34 @@ Após a execução, o relatório estará em:
 mochawesome-report/mochawesome.html
 ```
 
-### Enviar Relatório por Email
+## � Integração com GitHub Actions
 
-**Opção 1: Anexar arquivo HTML**
-```
-Compacte: mochawesome-report/
-E envie como anexo
+O projeto já possui um workflow configurado em:
+- `.github/workflows/cypress.yml`
+
+### O que acontece no CI
+- Checkout do repositório
+- Setup Node.js (`18.x` por padrão)
+- `npm install`
+- `npm test` (executa Cypress em modo headless)
+- Upload de artefatos em caso de sucesso/falha:
+  - `cypress-screenshots`
+  - `mochawesome-report`
+
+### Como disparar manualmente
+No GitHub, vá em: `Actions` -> `Cypress Tests` -> `Run workflow`.
+
+### Adicionar novas branches
+No arquivo `.github/workflows/cypress.yml`, ajuste o gatilho em:
+```yaml
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 ```
 
-**Opção 2: Enviar apenas o HTML**
-```
-Arquivo: mochawesome-report/mochawesome.html
-Destinatário abre no navegador
-```
-
-**Opção 3: Compartilhar por Drive/Cloud**
-```
-Upload da pasta completa: mochawesome-report/
-Compartilhe o link
-```
-
-## 🔧 Como Adicionar Novos Testes
+## �🔧 Como Adicionar Novos Testes
 
 ### 1. Criar Page Object
 ```javascript
@@ -258,12 +265,6 @@ describe('Novo Teste', () => {
 
 - **Login**: https://automationpratice.com.br/login
 - **Cadastro**: https://automationpratice.com.br/register
-
-## 📊 Relatórios e Screenshots
-
-- **Screenshots**: Salvos automaticamente em `cypress/screenshots/`
-- **Vídeos**: Capturados automaticamente (configurável)
-- **Relatórios**: Integração possível com ferramentas como Allure ou Cypress Dashboard
 
 ## 🤝 Contribuição
 
