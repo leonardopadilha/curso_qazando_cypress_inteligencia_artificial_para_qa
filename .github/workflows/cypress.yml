@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
-      matrix: # matrix é uma estratégia de teste paralelo que permite executar o mesmo job (tarefa) em múltiplas configurações diferentes automaticamente.
-        node-version: [20.x]
+      matrix: # é uma estratégia de teste paralelo que permite executar o mesmo job (tarefa) em múltiplas configurações diferentes automaticamente.
+        node-version: [ 20.x ]
 
     steps:
       - name: Checkout repository
