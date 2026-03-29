@@ -1,19 +1,51 @@
-# Web Automation com Cypress
+# 🚀 Automação de Testes com Cypress + IA (GitHub Copilot)
 
-Projeto de automação de testes web com Cypress, focado em qualidade, manutenibilidade e evolução constante.
+## 📌 Sobre o projeto
+Este projeto foi desenvolvido com o objetivo de explorar o uso de Inteligência Artificial no apoio à automação de testes utilizando Cypress.
 
-## Sobre o projeto
+A proposta foi entender, na prática, como ferramentas como o GitHub Copilot podem acelerar a escrita de testes, sugerir cenários e auxiliar na estruturação do código.
 
-- Projeto criado e evoluído com apoio do GitHub Copilot (IA) para acelerar desenvolvimento, melhorar padrões de código e gerar práticas de teste modernas.
-- Estrutura modular pensada para escalabilidade e facilidade de integração com pipelines CI/CD.
-- Foco em boas práticas de teste, documentação clara e valor para recrutadores técnicos.
+---
 
-## 🚀 Tecnologias Utilizadas
+## 🎯 Objetivo
+- Praticar automação de testes com Cypress
+- Explorar o uso de IA no dia a dia de QA
+- Avaliar ganhos de produtividade com o Copilot
+- Desenvolver pensamento crítico sobre código gerado por IA
 
-- **Cypress** - Framework de testes E2E
-- **Node.js** - Runtime JavaScript
-- **JavaScript (CommonJS)** - Linguagem de programação
-- **Page Objects + Custom Commands** - Arquitetura profissional
+---
+
+## 🧠 Onde a IA foi utilizada
+Durante o desenvolvimento, o GitHub Copilot foi utilizado para:
+- Sugerir comandos e estruturas de testes
+- Acelerar a escrita de cenários
+- Auxiliar na criação de funções e validações
+
+⚠️ Importante: todo o código sugerido foi revisado antes de ser utilizado.
+
+---
+
+## ⚙️ Tecnologias utilizadas
+- Cypress
+- JavaScript
+- GitHub Copilot
+
+---
+
+## 📂 Estrutura do projeto
+- `cypress/e2e` → Testes automatizados
+- `cypress/support` → Comandos customizados
+- `fixtures` → Dados mockados
+
+---
+
+## 📊 Aprendizados
+- IA acelera o desenvolvimento, mas não substitui o conhecimento técnico
+- Nem toda sugestão do Copilot é ideal — revisão é essencial
+- Estruturação de testes continua sendo responsabilidade do QA
+- Automação vai além de escrever código — envolve estratégia
+
+---
 
 ## 🏗️ Arquitetura - Page Objects + Custom Commands
 
@@ -274,14 +306,11 @@ describe('Novo Teste', () => {
 4. Push para a branch (`git push origin feature/nova-feature`)
 5. Abra um Pull Request
 
-## 📝 Licença
-
-Este projeto está sob a licença ISC.
-
-## 📞 Suporte
-
-Para dúvidas ou sugestões, abra uma issue no repositório.
+## 💡 Conclusão
+Este projeto reforçou que a IA pode ser uma grande aliada no processo de automação de testes, desde que utilizada com senso crítico.
 
 ---
 
-**Desenvolvido com ❤️ para demonstração de boas práticas em automação de testes**
+## 👨‍💻 Autor
+Leonardo Padilha  
+[LinkedIn](https://www.linkedin.com/in/leonardo-luiz-padilha/)  
